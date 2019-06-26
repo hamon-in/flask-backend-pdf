@@ -18,9 +18,6 @@ def read_pdf():
 	db.session.add(pdf_instance)
 	db.session.commit()
 
-	print(pdf_instance)
-	print(pdf_instance.id)
-
 	for box in box_arr:
 		#create a box instance by passing respective data
 		box_instance = BoxManager(box[0],box[1],box[2],box[3],box[4])
