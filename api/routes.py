@@ -25,6 +25,7 @@ def put_zones():
 		zone.ly = zone_obj.get('ly')
 		zone.rx = zone_obj.get('rx')
 		zone.ry = zone_obj.get('ry')
+		db.session.commit()
 		output.append(zone)
 	result = zones_schema.dump(output)
 	return jsonify(result.data)
