@@ -5,11 +5,11 @@ ma = Marshmallow(app)
 
 class BoxManagerSchema(ma.Schema):
 	class Meta:
-		fields = ('id','name','top_lt_x','top_lt_y','btm_rt_x','btm_rt_y')
+		fields = ('bid','bname','lx','ly','rx','ry')
 
 class PdfFormSchema(ma.Schema):
 	class Meta:
-		fields = ('id','name')
+		fields = ('pid','pname')
 
-boxes_manager_schema = BoxManagerSchema(many=True,strict=True)
+box_manager_schema = BoxManagerSchema(many=True,strict=True)
 pdf_form_schema = PdfFormSchema(strict=True)
