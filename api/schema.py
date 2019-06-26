@@ -3,13 +3,14 @@ from flask_marshmallow import Marshmallow
 
 ma = Marshmallow(app)
 
-class BoxManagerSchema(ma.Schema):
+class ZoneSchema(ma.Schema):
 	class Meta:
-		fields = ('id','name','top_lt_x','top_lt_y','btm_rt_x','btm_rt_y')
+		fields = ('zid','zname','lx','ly','rx','ry')
 
-class PdfFormSchema(ma.Schema):
+class PdfSchema(ma.Schema):
 	class Meta:
-		fields = ('id','name')
+		fields = ('pid','pname')
 
-boxes_manager_schema = BoxManagerSchema(many=True,strict=True)
-pdf_form_schema = PdfFormSchema(strict=True)
+zone_schema = ZoneSchema(strict=True)
+zones_schema = ZoneSchema(many=True,strict=True)
+pdf_schema = PdfSchema(strict=True)

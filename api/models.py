@@ -1,33 +1,33 @@
 from api import db
 
-class PdfForm(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(255), nullable=False)
-	data = db.Column(db.LargeBinary)
-	boxes = db.relationship('BoxManager', backref='box', lazy=True)
+class Pdf(db.Model):
+	pid = db.Column(db.Integer, primary_key=True)
+	pname = db.Column(db.String(255), nullable=False)
+	pfile = db.Column(db.LargeBinary)
+	zones = db.relationship('Zone', backref='zone', lazy=True)
 
 	def __init__(self,name,data):
-		self.name = name
-		self.data = data
+		self.pname = name
+		self.pfile = data
 
 	def __repr__(self):
-		return f'PdfForm({self.id},{self.name})'
+		return f'Pdf({self.pid},{self.pname})'
 
-class BoxManager(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(50), nullable=False)
-	top_lt_x = db.Column(db.Integer, nullable=False)
-	top_lt_y = db.Column(db.Integer, nullable=False)
-	btm_rt_x = db.Column(db.Integer, nullable=False)
-	btm_rt_y = db.Column(db.Integer, nullable=False)
-	pdf_id = db.Column(db.Integer, db.ForeignKey('pdf_form.id'), nullable=False)
+class Zone(db.Model):
+	zid = db.Column(db.Integer, primary_key=True)
+	zname = db.Column(db.String(50), nullable=False)
+	lx = db.Column(db.Integer, nullable=False)
+	ly = db.Column(db.Integer, nullable=False)
+	rx = db.Column(db.Integer, nullable=False)
+	ry = db.Column(db.Integer, nullable=False)
+	pid = db.Column(db.Integer, db.ForeignKey('pdf.pid'), nullable=False)
 
-	def __init__(self,name,tx,ty,bx,by):
-		self.name = name
-		self.top_lt_x = tx
-		self.top_lt_y = ty
-		self.btm_rt_x = bx
-		self.btm_rt_y = by
+	def __init__(self,name,lx,ly,rx,ry):
+		self.zname = name
+		self.lx = lx
+		self.ly = ly
+		self.rx = rx
+		self.ry = ry
 
 	def __repr__(self):
-		return f'BoxManager({self.name},{self.top_lt_x},{self.top_lt_y},{self.btm_rt_x},{self.btm_rt_y})'
+		return f'Zone({self.zname},{self.lx},{self.ly},{self.rx},{self.ry})'
